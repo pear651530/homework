@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>00957103-HW7-1</title>
+    <style type="text/css">
+        @import url(https://fonts.googleapis.com/earlyaccess/notosanstc.css);
+
+        img {
+            width: 300px;
+            height: 300px;
+        }
+
+		div, input {
+            font-family: Noto Sans TC, Perpetua, serif;
+			width: 300px;            
+        }
+		
+		div {
+            color: darkblue;
+            text-align: center;	
+			font-size: 24px;			
+        }
+
+		input {
+			font-size: 18px;
+			font-weight: bold;
+		}
+    </style>
+    <script>
+        let button1;
+        let tex="任意門 時光機 竹蜻蜓 時光布 記憶麵包 縮小燈 翻譯蒟蒻 如果電話亭 穿透環 更衣照相機";
+        let pic;
+        let sound;
+        let texarray=tex.split(" ");
+
+        function beg(){
+            sound.play();
+            pic=document.getElementById("accessory");
+            setimg(pic);
+        }
+
+        function show(){
+            let num=Math.floor(1 + Math.random()*10);
+            setimg( pic, num );
+        }
+
+        function setimg(picture,val){
+            console.log(val);
+            let mes=document.getElementById("messages");
+            if ( isFinite( val ) ){
+                if(val==10){
+                    picture.src = "10.png";
+                    mes.innerHTML="您抽到"+texarray[9]+"!";
+                }
+                else{
+                    picture.src = "0" + val + ".png";
+                    mes.innerHTML="您抽到"+texarray[val-1]+"!";
+                }
+            }
+            else
+                picture.src = "blank.png";
+        }
+
+        function start(){
+            let input=document.getElementById("play");
+            input.addEventListener( "click", beg, false );
+            sound = document.getElementById( "doraemon" );
+            sound.addEventListener( "ended", show, false );
+        }
+
+        window.addEventListener( "load", start, false );
+    </script>
+</head>
+
+<body>
+    <audio id = "doraemon" preload = "auto">
+        <source src = "doraemon.mp3" type = "audio/mpeg"></audio>
+    <img id="accessory" src="00.png" alt="accessory">
+    <form action="#">
+        <input id="play" type="button" value="抽道具">
+    </form>
+    <div id="messages">請按下Button抽出道具</div>
+
+
+</body>
+</html>
